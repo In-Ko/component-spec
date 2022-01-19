@@ -56,21 +56,24 @@ In order to define reasonable versions combinations for our software product we 
 the *Component Descriptor*, which allows the definition of dependencies to other component versions. For our example
 we could introduce a component for the overall product. Different versions of this product component are again
 described by a *Component Descriptor*, which contains dependencies to particular *Component Descriptors* for the 
-frontend, backend and monitoring. 
+frontend, backend and monitoring. Of course this is only an example how to describe a product as a components with 
+*Component Descriptors* but it is not mandatory to do so. 
 
-ToDo: Repo, 
+Every *Component Descriptors* has a name and a version. Dependencies to other *Component Descriptors* are expressed
+by their name and version.
 
-They consist of a set of (component) versions. Each version is described by a
-:ref:`Component Descriptor <concepts_component_descriptors>`, which describes
-the included set of artefacts. `Component Descriptors` are stored in a
-:ref:`Component Repository <_concepts_component_repositories` in a standardised
-way. Within such a component repository, component descriptors are addressed by
-their component name and version.
+*Component Descriptors* are stored in *Component Repositories*. A *Component Repository* must provide a possibility 
+to access every stored *Component Descriptor* only by its name and version. Another requirement to a 
+*Component Repository* is, that uploading a *Component Descriptors* fails if it has a dependency to another
+*Component Descriptor* which is not contained in the *Component Repository*.
 
-By separating the storage locations (component repository) from the component version
-identity, in combination with a defined addressing scheme, it is possible to
-access component descriptors in a component repository, in a location-independent manner.
-This can be leveraged to replicate component descriptors between component repositories.
+The concept of referencing other *Component Descriptors* only by their name and version allows the transport of
+the *Component Descriptors* from one *Component Repository* to another without the need to change component
+references in a *Component Descriptor* because the name and version of remain stable.
+
+**Todo: Perhaps some small example image to make this more clear?** 
+
+
 
 Each of the artefacts declared in a `Component Descriptor` has an `identity`, an `access`
 description and a `type`. `Artefact identities` can be used to reference an artefact in
