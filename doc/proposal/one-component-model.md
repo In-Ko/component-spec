@@ -6,7 +6,7 @@ This document specifies the *One Component Model (OCM)*.
 
 ### Scope
 
-Operating Software installations both for Cloud and on-premises covers many aspects:
+Operating software installations both for cloud and on-premises covers many aspects:
 
 - how, when and where are the technical artefacts created
 - how are technical artefacts stored and accessed
@@ -56,11 +56,17 @@ In order to define reasonable versions combinations for our software product we 
 the *Component Descriptor*, which allows the definition of dependencies to other component versions. For our example
 we could introduce a component for the overall product. Different versions of this product component are again
 described by a *Component Descriptor*, which contains dependencies to particular *Component Descriptors* for the 
-frontend, backend and monitoring. Of course this is only an example how to describe a product as a components with 
-*Component Descriptors* but it is not mandatory to do so. 
+frontend, backend and monitoring. 
 
-Every *Component Descriptors* has a name and a version. Dependencies to other *Component Descriptors* are expressed
+Every *Component Descriptor* has a name and a version. Dependencies to other *Component Descriptors* are expressed
 by their name and version.
+
+Of course this is only an example how to describe a product with OCM as a component with one *Component Descriptor* 
+with dependencies to other *Component Descriptors*, which itself could have dependencies and so on. 
+You are not restricted to this approach, i.e. you could still just maintain a list of component version combinations which 
+build a valid product release. But OCM provides you a simple approach to specify what belongs to a product version. 
+Starting with the *Component Descriptor* for a product version and following the component dependencies, you could 
+collect all artefacts, which belong to the product version. 
 
 *Component Descriptors* are stored in *Component Repositories*. A *Component Repository* must provide a possibility 
 to access every stored *Component Descriptor* only by its name and version. Another requirement to a 
@@ -69,54 +75,15 @@ to access every stored *Component Descriptor* only by its name and version. Anot
 
 The concept of referencing other *Component Descriptors* only by their name and version allows the transport of
 the *Component Descriptors* from one *Component Repository* to another without the need to change component
-references in a *Component Descriptor* because the name and version of remain stable.
+references in a *Component Descriptor* because the names and versions remain stable. Resources (technical artefacts)
+referenced by the *Component Descriptors* could either remain untouched or also transported to a new location. In the
+latter case the reference in the transported *Component Descriptors* have to be updated to their new locations.
 
-**Todo: Perhaps some small example image to make this more clear?** 
+**Todo: Perhaps some small example image to make this more clear?**
 
+### Application Areas
 
-
-Each of the artefacts declared in a `Component Descriptor` has an `identity`, an `access`
-description and a `type`. `Artefact identities` can be used to reference an artefact in
-the context of the declaring component descriptor. The `Artefact type` defines how the
-artefact is to be interpreted. The `access Description` defines from where the artefact
-can be retrieved.
-
-When replicating component descriptors and their artefacts, the artefacts' `access` descriptions
-may be changed. However, `artefact types` and `artefact identities` always remain unchanged.
-
-The CNUDIE Component Model can roughly be compared to a filesystem "living" in an arbitrary
-storage (e.g. a blobstore, oci-registry, archive, ..).
-
-Starting from an arbitrary component repository used as root repository it is
-possible to access any artefact described by the component model as long as the
-dedicated component version has been imported into this repository. The
-dedicated component repository together with the component version identity
-allows to access the component descriptor which then is used to determine the
-access for dedicated artefacts given by their local identity. This way the
-component respository acts as composed filesystem with fixed top level folders,
-the components and their versions, followed by the artefact level, which then
-may point into any another (kind of) repository. Sub folders can be described
-by component version references described by component descriptors, which again
-feature a local identity in the describing component descriptor.
-
-
-Scope Definition
-----------------
-
-The CNUDIE Component model intends to solve the problem of addressing,
-identifying, and accessing artefacts for software components, relative to an
-arbitrary component repository. By that, it also enables the transport of
-software components between component repositories.
-
-Through the standardisation of structure and `access` to artefacts, it can serve as an
-interface to any operations that need to interact with the content. This allows
-for tools operating against this interface to be implemented in a re-usable, and
-technology-agnostic manner (examples being transport, compliance and security
-scanning, codesigning, ..).
-
-Higherlevel functionality, such as deployment, or lifecycle-management aspects are
-out of the scope the CNUDIE Component Model targets. Data for such aspects (for example
-a deployment blueprint) can, however, be described by the CNUDIE Component Model
-as dedicated typed artefacts. This is equivalent to e.g. adding a `Makefile`
-into a filesystem. The filesystem does not "know" about the semantics of the
-`Makefile` (including, e.g. declared dependencies towards other files).
+OCM specifies a well-defined way to define components and resources, belonging to a particular version of a software 
+product, and how to access these. Though the following application areas are out of scope for OCM, it provides a 
+re-usable, and technology-agnostic interface for compliance checks, security scanning, code signing, transport, deployment
+or other lifecycle-management aspects. 
