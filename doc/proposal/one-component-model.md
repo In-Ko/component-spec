@@ -1,6 +1,6 @@
-# One Component Model Specification
+# Open Component Model Specification
 
-This document specifies the *One Component Model (OCM)*.
+This document specifies the *Open Component Model (OCM)*.
 
 ## Introduction
 
@@ -88,3 +88,31 @@ OCM specifies a well-defined way to define components and resources, belonging t
 product, and how to access these. Though the following application areas are out of scope for OCM, it provides a 
 re-usable, and technology-agnostic interface for compliance checks, security scanning, code signing, transport, deployment
 or other lifecycle-management aspects. 
+
+## Component Descriptor Specification
+
+*Component Descriptors* is the central concept of OCM. A *Component Descriptor* describes what belongs to a particular 
+version of a software component  and how to access it. This includes:
+
+- resources, i.e. technical artefacts like binaries, docker images, ...
+- sources like code in github
+- dependencies to other software component versions to express
+
+### Component Descriptor Format Specification
+
+A *Component Descriptor* is a [YAML](https://yaml.org/) or [JSON](https://www.json.org/json-en.html) document 
+according to this [schema](../../language-independent/component-descriptor-v2-schema.yaml).
+
+In serialised form, Component Descriptors MUST be UTF-8-encoded. Either YAML, or JSON may be used. If YAML is used 
+as serialisation format, only the subset of features defined by JSON must be used, thus allowing conversion to a 
+JSON representation.
+
+YAML is recommended as preferred serialisation format.
+
+YAML permits the usage of comments, and allows different formatting options. None of those are by contract part of a 
+*Component Descriptor*, thus implementations may arbitrarily choose to retain or not retain comments or formatting 
+options.
+
+The order of attributes is insignificant, and MUST NOT be relied upon.
+
+The order of elements in sequences MAY be significant and MUST be retained in cases where it is significant.
