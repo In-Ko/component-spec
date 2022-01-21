@@ -6,7 +6,7 @@ This document specifies the *Open Component Model (OCM)*.
 
 ### Scope
 
-Operating software installations both for cloud and on-premises covers many aspects:
+Operating software installations/products both for cloud and on-premises covers many aspects:
 
 - how, when and where are the technical artefacts created
 - how are technical artefacts stored and accessed
@@ -28,13 +28,13 @@ access them. This provides a clear interface between the production and the depl
 
 Though the following application areas are out of scope for OCM, it provides a uniform interface for 
 compliance checks, security scanning, code signing, transport, deployment or other lifecycle-management aspects. 
-If software products are described using OCM, e.g. a scanning tool could use this to collect all technical 
-artefacts it needs to check. If the technical resources of different software products are described with different 
+If software installations are described using OCM, e.g. a scanning tool could use this to collect all technical 
+artefacts it needs to check. If the technical resources of different software installations are described with different 
 formalisms, such tools must provide interfaces and implementations for all if them. 
 
-The problem becomes even harder if a software product is build of different parts/components, each described with 
+The problem becomes even harder if a software installations is build of different parts/components, each described with 
 another formalism. OCM allows a uniform definition of such dependencies such that one consistent description of
-for a software product is available.
+for a software installation is available.
 
 The OCM does not make any assumptions about the (**Todo: Is this really the case?**)
  
@@ -48,7 +48,7 @@ Implementations of the OCM must define exactly those aspects.
 ### Motivation Example
 
 Usually complex software products are divided into logical units, which are called components in this specification.
-For example a software product might consist of three components, a frontend, a backend and some monitoring stack.
+For example, a software product might consist of three components, a frontend, a backend and some monitoring stack.
 Of course the software product itself could be seen as a component comprising the other three components.
 
 As a result of the development phase, versions of the components are created. 
@@ -94,12 +94,12 @@ latter case, the references in the transported *Component Descriptors* have to b
 
 ## Component Descriptor Specification
 
-*Component Descriptors* is the central concept of OCM. A *Component Descriptor* describes what belongs to a particular 
+*Component Descriptors* are the central concept of OCM. A *Component Descriptor* describes what belongs to a particular 
 version of a software component  and how to access it. This includes:
 
 - resources, i.e. technical artefacts like binaries, docker images, ...
 - sources like code in github
-- dependencies to other software component versions to express
+- dependencies to other software component versions
 
 ### Component Descriptor Format Specification
 
