@@ -119,3 +119,88 @@ options.
 The order of attributes is insignificant, and MUST NOT be relied upon.
 
 The order of elements in sequences MAY be significant and MUST be retained in cases where it is significant.
+
+### Schema Version
+
+A *Component Descriptor* document consist of two top level elements: *meta*, *component*
+
+The *meta* element contains the schema version of the *Component Descriptor* specification. This document defines
+schema version *v2*.
+
+```
+meta:
+  - schemaVersion: "v2"
+component:
+  ...
+```
+
+
+### Name and Version
+
+Every *Component Descriptor* has a name (*component.name*) and version (*component.version), also called component 
+name and version. Name and version are the identifier for a *Component Descriptor* and the component version described
+by it.
+
+```
+meta:
+  - schemaVersion: "v2"
+component:
+  name: ...
+  version: ...
+```
+
+Component names reside in a global namespace. To avoid name conflicts component names MUST start with a valid domain 
+name (as specified by RFC-1034, RFC-1035) with an optional URL path suffix (as specified by RFC-1738).
+
+If no URL path suffix is specified, the domain MUST be possessed by the component proprietor. If a URL path suffix is 
+specified, the namespace started by the concatenation of domain and URL path suffix MUST be possessed by the component 
+proprietor.
+
+The component name SHOULD reference a location where the component’s resources (typically source code, and/or 
+documentation) are hosted. An example and recommended practise is using GitHub repository names for components on 
+GitHub like *github.com/gardener/gardener*.
+
+Component versions refer to specific snapshots of a component. A common scenario being the release of a component.
+Component versions MUST adhere to a loosened variant of [Semver 2.0.0](https://semver.org/).
+
+Different to strict semver 2.0.0, component versions MAY:
+
+- have an optional v prefix
+- omit the third component (patch-level); if omitted, path-level is implied to equal 0
+
+### Sources and Resources
+
+Components versions are typically built from sources, maintained in source code management systems, 
+and transformed into resources (for example by a build), which are used at installation or runtime for the product.
+
+Resources are “local” if they are derived from a source declared by the same component. Resources are “external” if
+they are not derived form a source declared by the same component, e.g. a docker image for a monitoring stack
+developed in another component. 
+
+Each *Component Descriptor* contains a field with references to the used sources and a field with references 
+to the used resources. 
+
+Example for sources: 
+
+```
+...
+component:
+  sources:
+  - name: extension-networking-calico
+    version: v1.19.4
+    type: git
+    access:
+      commit: e01326928b6f9825dba9fa530b8d4917f93194b0
+      ref: refs/tags/v1.19.4
+      repoUrl: github.com/gardener/gardener-extension-networking-calico
+      type: github
+      ...
+```
+
+Every source entry has a name and version field. Furthermore, it has a type field, specifying the nature of the 
+source code management system, and a type specific access section.
+
+
+
+
+

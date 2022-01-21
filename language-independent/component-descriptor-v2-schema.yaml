@@ -19,8 +19,7 @@ definitions:
 
   componentName:
     type: 'string'
-    maxLength: 255
-    pattern: '^[a-z0-9.\-]+[.][a-z]{2,4}/[-a-z0-9/_.]*$'
+    description: 'Component Names MUST start with a valid domain name (as specified by RFC-1034, RFC-1035) with an optional URL path suffix (as specified by RFC-1738)'
 
   identityAttributeKey:
     minLength: 2
@@ -117,7 +116,6 @@ definitions:
         $ref: '#/definitions/relaxedSemver'
       type:
         type: 'string'
-        enum: ['git']
       labels:
         type: 'array'
         items:

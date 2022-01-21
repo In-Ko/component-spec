@@ -1,3 +1,7 @@
+## Todo
+- describe that name and version of a component descriptor are unique in the context of a component repository
+- extraidentity (and other missing fields in cd json schema)
+
 ## To check
 
 ---
@@ -9,6 +13,12 @@ can be retrieved.
 
 When replicating component descriptors and their artefacts, the artefacts' `access` descriptions
 may be changed. However, `artefact types` and `artefact identities` always remain unchanged.
+---
+Context Repositories
+Component Descriptors are published to Context Repositories. Context repositories MUST always contain the transitive closure of all Component Descriptors, referenced by contained Comonent Descriptor versions.
+
+Adhering to the aforementioned requirement of closure, Component Descriptors MAY be transported to other Context Repositories. When doing so, the history of Context Repositories MUST be retained, and appended. 
+As part of such a transporting procedure, both the components’ sources and resources MAY be transferred to different repositories. The new locations MUST in this case be reflected in the new Component Descriptor.
 ---
 
 ## Probably not needed
