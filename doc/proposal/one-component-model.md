@@ -26,9 +26,19 @@ The produced artefacts must be stored somewhere such that they can be accessed a
 The OCM defines a standard to describe which technical artefacts belong to a software installation and how to 
 access them. This provides a clear interface between the production and the deployment/lifecycle management phase.
 
-The OCM does not make any assumptions about the 
+Though the following application areas are out of scope for OCM, it provides a uniform interface for 
+compliance checks, security scanning, code signing, transport, deployment or other lifecycle-management aspects. 
+If software products are described using OCM, e.g. a scanning tool could use this to collect all technical 
+artefacts it needs to check. If the technical resources of different software products are described with different 
+formalisms, such tools must provide interfaces and implementations for all if them. 
+
+The problem becomes even harder if a software product is build of different parts/components, each described with 
+another formalism. OCM allows a uniform definition of such dependencies such that one consistent description of
+for a software product is available.
+
+The OCM does not make any assumptions about the (**Todo: Is this really the case?**)
  
-- kinds of technical artefacts (e.g. docker images, helm chart, binaries etc.)
+- kinds of technical artefacts (e.g. docker images, helm chart, binaries etc.) 
 - technology how to store and access technical artefacts (e.g. as OCI artefacts in an OCI registry)
 
 Implementations of the OCM must define exactly those aspects. 
@@ -81,13 +91,6 @@ referenced by the *Component Descriptors* could either remain untouched or also 
 latter case, the references in the transported *Component Descriptors* have to be updated to their new locations.
 
 **Todo: Perhaps some small example image to make this more clear?**
-
-### Application Areas
-
-OCM specifies a well-defined way to define components and resources, belonging to a particular version of a software 
-product, and how to access these. Though the following application areas are out of scope for OCM, it provides a 
-re-usable, and technology-agnostic interface for compliance checks, security scanning, code signing, transport, deployment
-or other lifecycle-management aspects. 
 
 ## Component Descriptor Specification
 
